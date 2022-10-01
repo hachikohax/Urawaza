@@ -1,0 +1,21 @@
+<IfModule mod_reqrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On 
+
+    #Handle Auth Header 
+    RewriteCond %{HTTP:Authorization} . 
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    #Redirect trailing slashes if not folder 
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    #Send requests to front controller
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f 
+    RewriteRule ^ index.php [L]
+</IfModule>
