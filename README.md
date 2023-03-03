@@ -1,1 +1,2 @@
-# UrawazaV2
+# Urawaza - intentionally vulnerable web api WIP 
+collaborator: @risquevan 
